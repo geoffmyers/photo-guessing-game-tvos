@@ -16,10 +16,24 @@ open PhotoGuessingGame.xcodeproj   # Xcode 15 or newer
 
 ## Checks
 
-The project has no test target yet, so there is no automated suite to run.
-Before pushing, build with **⌘B** and play a round in the tvOS Simulator in the
-mode you changed, using **Use Demo Photos** if the simulator has no library.
-A test target is a welcome contribution.
+<!-- CHECKS:START -->
+Every push and pull request runs these checks in GitHub Actions
+([`.github/workflows/checks.yml`](.github/workflows/checks.yml)), and every release has passed them.
+To run one yourself, use the same commands from the directory shown.
+
+**tvOS build** (macOS with Xcode, from the repository root):
+
+```bash
+xcodebuild -project PhotoGuessingGame.xcodeproj -target PhotoGuessingGame \
+  -sdk appletvsimulator -configuration Debug CODE_SIGNING_ALLOWED=NO build
+```
+
+<!-- CHECKS:END -->
+
+The project has no test target yet, so CI only builds the app. Before pushing,
+also play a round in the tvOS Simulator in the mode you changed, using **Use
+Demo Photos** if the simulator has no library. A test target is a welcome
+contribution.
 
 ## Before you open a pull request
 
