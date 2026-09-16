@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Photo Guessing Game (tvOS): screen flow and scoring</title>
+  <desc>A diagram, not a screenshot. The app moves through the game phases defined in GameModels.swift: setup, playing, feedback, victory, and a no-photos tie. Each turn climbs a three-rung ladder worth 1, 2 and 3 points; the first player to 10 wins.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="560" rx="16" fill="#0f172a"/>
+
+  <text x="40" y="52" fill="#f8fafc" font-size="26" font-weight="700">Photo Guessing Game for Apple TV</text>
+  <text x="40" y="80" fill="#94a3b8" font-size="15">Diagram of the game flow and scoring, drawn from the source. Not a screen capture.</text>
+
+  <!-- Phase flow -->
+  <g font-size="15">
+    <rect x="40" y="120" width="250" height="150" rx="12" fill="#1e293b" stroke="#334155"/>
+    <text x="60" y="150" fill="#38bdf8" font-size="13" font-weight="700" letter-spacing="1">SETUP</text>
+    <text x="60" y="178" fill="#e2e8f0">Name both players</text>
+    <text x="60" y="203" fill="#e2e8f0">Pick "When Was It?"</text>
+    <text x="60" y="226" fill="#e2e8f0">  or "Where Was It?"</text>
+    <text x="60" y="252" fill="#e2e8f0">Load photos or demo set</text>
+
+    <rect x="340" y="120" width="250" height="150" rx="12" fill="#1e293b" stroke="#334155"/>
+    <text x="360" y="150" fill="#38bdf8" font-size="13" font-weight="700" letter-spacing="1">PLAYING</text>
+    <text x="360" y="178" fill="#e2e8f0">Photo on screen</text>
+    <text x="360" y="203" fill="#e2e8f0">Guess one rung at a time</text>
+    <text x="360" y="228" fill="#e2e8f0">with the Siri Remote</text>
+    <text x="360" y="252" fill="#e2e8f0">(focus navigation only)</text>
+
+    <rect x="640" y="120" width="250" height="150" rx="12" fill="#1e293b" stroke="#334155"/>
+    <text x="660" y="150" fill="#38bdf8" font-size="13" font-weight="700" letter-spacing="1">FEEDBACK</text>
+    <text x="660" y="178" fill="#e2e8f0">Right: bank the points,</text>
+    <text x="660" y="203" fill="#e2e8f0">  climb to the next rung</text>
+    <text x="660" y="228" fill="#e2e8f0">Wrong: turn ends,</text>
+    <text x="660" y="252" fill="#e2e8f0">  banked points are kept</text>
+
+    <rect x="940" y="120" width="220" height="150" rx="12" fill="#1e293b" stroke="#334155"/>
+    <text x="960" y="150" fill="#fbbf24" font-size="13" font-weight="700" letter-spacing="1">VICTORY</text>
+    <text x="960" y="178" fill="#e2e8f0">First to 10 points</text>
+    <text x="960" y="203" fill="#e2e8f0">Player 2 gets a</text>
+    <text x="960" y="228" fill="#e2e8f0">  tie-breaker turn if</text>
+    <text x="960" y="252" fill="#e2e8f0">  Player 1 got there first</text>
+
+    <line x1="290" y1="195" x2="336" y2="195" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="590" y1="195" x2="636" y2="195" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="890" y1="195" x2="936" y2="195" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M765,270 C765,318 465,318 465,274" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="520" y="330" fill="#94a3b8" font-size="14">next player, next photo</text>
+    <text x="940" y="300" fill="#94a3b8" font-size="14">Out of photos on a tie:</text>
+    <text x="940" y="320" fill="#94a3b8" font-size="14">"no photos" screen</text>
+  </g>
+
+  <!-- Scoring ladder -->
+  <g font-size="15">
+    <text x="40" y="385" fill="#f8fafc" font-size="18" font-weight="700">One turn, three rungs (6 points for a perfect turn, with confetti)</text>
+
+    <text x="40" y="425" fill="#94a3b8" font-size="14">When Was It?</text>
+    <rect x="160" y="405" width="170" height="34" rx="8" fill="#0c4a6e"/>
+    <text x="175" y="428" fill="#e0f2fe">Year  +1  (8 choices)</text>
+    <rect x="345" y="405" width="150" height="34" rx="8" fill="#075985"/>
+    <text x="360" y="428" fill="#e0f2fe">Month  +2</text>
+    <rect x="510" y="405" width="150" height="34" rx="8" fill="#0369a1"/>
+    <text x="525" y="428" fill="#e0f2fe">Day  +3</text>
+
+    <text x="40" y="475" fill="#94a3b8" font-size="14">Where Was It?</text>
+    <rect x="160" y="455" width="170" height="34" rx="8" fill="#3b0764"/>
+    <text x="175" y="478" fill="#f3e8ff">Country  +1  (5 choices)</text>
+    <rect x="345" y="455" width="150" height="34" rx="8" fill="#581c87"/>
+    <text x="360" y="478" fill="#f3e8ff">State  +2  (5)</text>
+    <rect x="510" y="455" width="150" height="34" rx="8" fill="#6b21a8"/>
+    <text x="525" y="478" fill="#f3e8ff">City  +3  (5)</text>
+
+    <text x="700" y="425" fill="#cbd5e1" font-size="14">Dates come from each photo's metadata; places come</text>
+    <text x="700" y="447" fill="#cbd5e1" font-size="14">from its GPS position, reverse-geocoded through</text>
+    <text x="700" y="469" fill="#cbd5e1" font-size="14">OpenStreetMap Nominatim. Every sound is synthesised</text>
+    <text x="700" y="491" fill="#cbd5e1" font-size="14">at runtime; the app ships no audio files.</text>
+  </g>
+
+  <text x="40" y="535" fill="#64748b" font-size="13">Source: GameModels.swift (phases, points, winningScore = 10), GameViewModel.swift (turns, tie-breaker), GameUtils.swift (choice counts)</text>
+</svg>
