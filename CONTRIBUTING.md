@@ -30,6 +30,23 @@ xcodebuild -project PhotoGuessingGame.xcodeproj -target PhotoGuessingGame \
 
 <!-- CHECKS:END -->
 
+<!-- RELEASES:START -->
+### Releases
+
+Every push to `main` runs the release workflow
+([`.github/workflows/release.yml`](.github/workflows/release.yml)). It reads the version with
+
+```bash
+grep -m1 -o 'MARKETING_VERSION = [^;]*' PhotoGuessingGame.xcodeproj/project.pbxproj | cut -d' ' -f3
+```
+
+and, if `v<version>` has no release yet, builds these and publishes them as
+a GitHub Release. To release, raise the version.
+
+- **tvOS app** (macOS with Xcode): `*.ipa`
+
+<!-- RELEASES:END -->
+
 The project has no test target yet, so CI only builds the app. Before pushing,
 also play a round in the tvOS Simulator in the mode you changed, using **Use
 Demo Photos** if the simulator has no library. A test target is a welcome

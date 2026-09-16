@@ -104,6 +104,11 @@ from Wikimedia Commons, credited under [Credits](#credits).
 
 ## Installation
 
+Each version is also on the
+[Releases](https://github.com/geoffmyers/photo-guessing-game-tvos/releases/latest)
+page as an unsigned build, which installs only after you sign it with your own
+Apple ID.
+
 ```bash
 git clone https://github.com/geoffmyers/photo-guessing-game-tvos.git
 cd photo-guessing-game-tvos
