@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/icon.svg" width="96" height="96" alt="Photo Guessing Game (tvOS) icon">
+</p>
+
 # Photo Guessing Game (tvOS)
 
 <!-- BADGES:START -->
@@ -196,6 +200,8 @@ remote-driven, ten-foot interface.
   [Jebulon](https://commons.wikimedia.org/wiki/User:Jebulon).
 - Apple TV, tvOS, SwiftUI and Xcode are trademarks of Apple Inc. This project is
   not affiliated with or endorsed by Apple.
+- The README icon is the [Font Awesome](https://fontawesome.com/) `tv` glyph,
+  used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 Written by Geoff Myers.
 
