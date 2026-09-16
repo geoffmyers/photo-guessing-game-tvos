@@ -5,6 +5,7 @@ struct DaySelectorView: View {
 
     private let weekdays = ["S", "M", "T", "W", "T", "F", "S"]
     private let columns = Array(repeating: GridItem(.fixed(70), spacing: 8), count: 7)
+    private let cellHeight: CGFloat = 48
 
     var body: some View {
         VStack(spacing: 20) {
@@ -14,7 +15,7 @@ struct DaySelectorView: View {
                     HStack(spacing: 5) {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
-                        Text("\(year)")
+                        Text(String(year))
                     }
                 }
 
@@ -30,7 +31,7 @@ struct DaySelectorView: View {
             .font(.headline)
 
             Text("Select the day")
-                .font(.title2)
+                .font(.headline)
                 .fontWeight(.semibold)
 
             // Calendar grid
@@ -47,11 +48,13 @@ struct DaySelectorView: View {
                 }
 
                 // Days grid
-                LazyVGrid(columns: columns, spacing: 8) {
-                    // Empty cells for offset
-                    ForEach(0..<firstWeekdayOffset, id: \.self) { _ in
+                LazyVGrid(columns: columns, spacing: 6) {
+                    // Empty cells for offset. Their ids are negative so they
+                    // cannot collide with the day buttons' ids (1...31): the
+                    // grid drops views whose ids repeat, which lost days 1-4.
+                    ForEach(-firstWeekdayOffset..<0, id: \.self) { _ in
                         Color.clear
-                            .frame(width: 70, height: 60)
+                            .frame(width: 70, height: cellHeight)
                     }
 
                     // Day buttons
@@ -59,14 +62,14 @@ struct DaySelectorView: View {
                         GridButton(
                             title: "\(day)",
                             width: 70,
-                            height: 60
+                            height: cellHeight
                         ) {
                             viewModel.submitGuess(day)
                         }
                     }
                 }
             }
-            .padding(.horizontal, 60)
+            .padding(.horizontal, 20)
         }
     }
 

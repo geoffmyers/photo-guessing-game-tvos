@@ -15,7 +15,9 @@ struct GameBoardView: View {
             )
             .frame(width: 280)
 
-            // Center - Photo and Guessing Interface
+            // Center - Photo beside the Guessing Interface. Stacked above
+            // it, the photo was squeezed to a thumbnail by the taller
+            // selectors (a six-row calendar, five location options).
             VStack(spacing: 30) {
                 // Game mode indicator
                 HStack {
@@ -25,12 +27,16 @@ struct GameBoardView: View {
                 .font(.title3)
                 .foregroundColor(.secondary)
 
-                // Photo Display
-                PhotoDisplayView()
-                    .frame(maxHeight: 500)
+                HStack(spacing: 30) {
+                    // Photo Display
+                    PhotoDisplayView()
+                        .frame(width: 600)
 
-                // Guessing Interface
-                GuessingInterfaceView()
+                    // Guessing Interface
+                    GuessingInterfaceView()
+                        .frame(maxWidth: .infinity)
+                }
+                .frame(maxHeight: .infinity)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 40)

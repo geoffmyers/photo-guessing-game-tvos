@@ -12,7 +12,7 @@ struct MonthSelectorView: View {
                 HStack(spacing: 10) {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.green)
-                    Text("Year: \(year)")
+                    Text("Year: \(String(year))")
                         .fontWeight(.semibold)
                 }
                 .font(.headline)
@@ -34,7 +34,6 @@ struct MonthSelectorView: View {
                     }
                 }
             }
-            .padding(.horizontal, 40)
         }
     }
 }

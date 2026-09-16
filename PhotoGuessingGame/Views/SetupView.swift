@@ -139,7 +139,7 @@ struct PlayerNameInput: View {
                 .padding(.vertical, 15)
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(15)
-                .frame(width: 300)
+                .frame(width: 440)
         }
     }
 }
@@ -166,6 +166,7 @@ struct GameModeButton: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if !isEnabled {
                     Text("Not enough photos")
@@ -173,7 +174,8 @@ struct GameModeButton: View {
                         .foregroundColor(.orange)
                 }
             }
-            .frame(width: 280, height: 200)
+            .padding(.horizontal, 20)
+            .frame(width: 460, height: 280)
             .background(
                 RoundedRectangle(cornerRadius: 20)
                     .fill(isSelected ? Color.blue.opacity(0.3) : Color.white.opacity(0.1))

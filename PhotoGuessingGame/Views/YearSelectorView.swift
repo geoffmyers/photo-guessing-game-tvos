@@ -10,6 +10,8 @@ struct YearSelectorView: View {
             Text("When was this photo taken?")
                 .font(.title2)
                 .fontWeight(.semibold)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
 
             Text("Select the year")
                 .font(.headline)
@@ -26,7 +28,6 @@ struct YearSelectorView: View {
                     }
                 }
             }
-            .padding(.horizontal, 40)
         }
     }
 }

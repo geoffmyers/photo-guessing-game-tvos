@@ -8,6 +8,8 @@ struct CountrySelectorView: View {
             Text("Where was this photo taken?")
                 .font(.title2)
                 .fontWeight(.semibold)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
 
             Text("Select the country")
                 .font(.headline)
@@ -21,7 +23,7 @@ struct CountrySelectorView: View {
                 }
             }
             .frame(maxWidth: 500)
-            .padding(.horizontal, 60)
+            .padding(.horizontal, 20)
         }
     }
 }

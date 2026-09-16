@@ -204,6 +204,8 @@ struct GameFeedback: Equatable {
     let correctAnswer: String
     let pointsEarned: Int
     let isPerfect: Bool
+    /// False for a correct answer that leads to another phase of the same turn.
+    var endsTurn = true
 
     static let empty = GameFeedback(isCorrect: false, message: "", correctAnswer: "", pointsEarned: 0, isPerfect: false)
 }

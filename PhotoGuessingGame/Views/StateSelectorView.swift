@@ -28,7 +28,7 @@ struct StateSelectorView: View {
                 }
             }
             .frame(maxWidth: 500)
-            .padding(.horizontal, 60)
+            .padding(.horizontal, 20)
         }
     }
 }

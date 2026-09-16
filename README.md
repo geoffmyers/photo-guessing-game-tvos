@@ -7,17 +7,6 @@
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 <!-- BADGES:END -->
 
-## Description
-
-A two-player party game for the living room. The Apple TV shows a photo from
-your own library and the players take turns guessing **when** it was taken (year,
-then month, then day) or **where** (country, then state, then city). Each correct
-answer is worth more than the last, a wrong answer ends the turn, and the first
-player to 10 points wins.
-
-It is a native tvOS app written in SwiftUI and played entirely with the Siri
-Remote.
-
 ## Table of Contents
 
 - [Description](#description)
@@ -34,17 +23,49 @@ Remote.
 - [Contributing](#contributing)
 - [License](#license)
 
+## Description
+
+A two-player party game for the living room. The Apple TV shows a photo from
+your own library and the players take turns guessing **when** it was taken (year,
+then month, then day) or **where** (country, then state, then city). Each correct
+answer is worth more than the last, a wrong answer ends the turn, and the first
+player to 10 points wins.
+
+It is a native tvOS app written in SwiftUI and played entirely with the Siri
+Remote.
+
 ## Screenshots
 
 <p align="center">
-  <img src="docs/game-flow.svg" width="100%" alt="Diagram of the game: setup, playing, feedback and victory screens, and the two three-rung scoring ladders">
+  <img src="docs/screenshots/year.png" width="100%" alt="The game board: Alex's panel on the left marked Your Turn, a photo of a castle by a harbour in the middle with a 1 / 11 counter, the question When was this photo taken? with eight year buttons, 2016 focused, and Sam's panel on the right">
 </p>
 
-<p align="center"><em>A diagram of the game flow and scoring, drawn from the source. It is not a screen capture.</em></p>
+<p align="center"><em>A <strong>When Was It?</strong> turn: the first rung asks for the year.</em></p>
 
-There is no screen capture yet, because producing one means running the app in
-the tvOS Simulator, which needs Xcode on a Mac. A real capture is welcome as a
-pull request.
+<p align="center">
+  <img src="docs/screenshots/day.png" width="49%" alt="The day rung: year and month ticked, a running +3 points, and a calendar of July with 18 focused">
+  <img src="docs/screenshots/perfect.png" width="49%" alt="A Perfect! card awarding 6 points, with confetti over the board">
+</p>
+
+<p align="center"><em>The day rung, from a calendar of the right month, and a perfect turn.</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/state.png" width="49%" alt="A Where Was It? turn on a photo of a pelican before the Golden Gate Bridge: country ticked as United States, and Massachusetts, California and Illinois offered as the state">
+  <img src="docs/screenshots/wrong.png" width="49%" alt="A Wrong! card keeping the 1 point already won and showing the correct answer, July 22, 2010">
+</p>
+
+<p align="center"><em>A <strong>Where Was It?</strong> turn at the state rung, and a wrong answer, which shows the right one and keeps the points already won.</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/setup.png" width="49%" alt="The setup screen with 11 photos loaded, all with dates and locations, and a Start Game button">
+  <img src="docs/screenshots/winner.png" width="49%" alt="The winner screen: a trophy, Alex 18 points against Sam 6, and Play Again">
+</p>
+
+<p align="center"><em>Setup with a photo library loaded, and the end of a match.</em></p>
+
+These are real captures from the tvOS 26.5 Simulator (Apple TV 4K), driven with
+the Siri Remote by an Xcode UI test. The photos are public-domain (CC0) pictures
+from Wikimedia Commons, credited under [Credits](#credits).
 
 ## Features
 
@@ -110,7 +131,13 @@ Siri Remote to move between choices and click to select.
 | Mode | Rung 1 | Rung 2 | Rung 3 |
 |---|---|---|---|
 | When Was It? | Year, from 8 choices | Month | Day, from a calendar grid |
-| Where Was It? | Country, from 5 choices | State or region, from 5 | City, from 5 |
+| Where Was It? | Country, from up to 5 | State or region, from up to 5 | City, from up to 5 |
+
+The place choices come from the loaded photos: the countries they were taken
+in, then the states among the photos from the answer's country, then the cities
+among those from its state. A small library can therefore offer a single state
+or city. If reverse geocoding found no state or no city for a photo, that rung
+is skipped.
 
 A correct answer banks its points and moves to the next rung. A wrong answer
 shows the right one and ends the turn, but **the points already banked are
@@ -126,8 +153,14 @@ photo.
 | 3 (day or city) | 3 | 6 |
 
 The first player to reach **10 points** wins. If Player 1 gets there first,
-Player 2 gets a final turn, and the higher score wins. If the photos run out,
-the higher score wins; a tie with no photos left ends on a "no photos" screen.
+Player 2 gets a turn to catch up:
+
+- if Player 2 reaches 10 as well, the higher score wins (a tie plays on);
+- if Player 2 stays below 10, play continues, and Player 1 wins at the end of
+  their next turn.
+
+If the photos run out, the higher score wins; a tie with no photos left ends on
+a "no photos" screen.
 
 ## Architecture
 
@@ -155,6 +188,12 @@ remote-driven, ten-foot interface.
   through the [Nominatim](https://nominatim.org/) reverse-geocoding service.
   OpenStreetMap data is © OpenStreetMap contributors and available under the
   Open Database License (ODbL).
+- The photos in the screenshots are from Wikimedia Commons, released into the
+  public domain (CC0) by
+  [DimiTalen](https://commons.wikimedia.org/wiki/User:DimiTalen),
+  [Ermell](https://commons.wikimedia.org/wiki/User:Ermell),
+  [Bernard Gagnon](https://commons.wikimedia.org/wiki/User:Bgag) and
+  [Jebulon](https://commons.wikimedia.org/wiki/User:Jebulon).
 - Apple TV, tvOS, SwiftUI and Xcode are trademarks of Apple Inc. This project is
   not affiliated with or endorsed by Apple.
 

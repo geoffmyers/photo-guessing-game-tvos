@@ -61,6 +61,8 @@ struct GridButton: View {
                 Text(title)
                     .font(.title2)
                     .fontWeight(.semibold)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
 
                 if let subtitle = subtitle {
                     Text(subtitle)

@@ -14,14 +14,21 @@ Players guess when photos were taken in three phases:
 
 ### Location Mode ("Where Was It?")
 Players guess where photos were taken in three phases:
-1. **Country** (1 point) - Select from 5 options
-2. **State/Region** (2 points) - Select from 5 options
-3. **City** (3 points) - Select from 5 options
+1. **Country** (1 point) - Select from up to 5 options
+2. **State/Region** (2 points) - Select from up to 5 options
+3. **City** (3 points) - Select from up to 5 options
+
+Options come only from the loaded photos: states from photos in the answer's
+country, cities from photos in its state, so a small library can offer just
+one. A photo with no geocoded state or city skips that phase
+(`GameViewModel.followingPhase`), since its selector would be empty.
 
 ## Scoring
 - Correct guesses accumulate points through phases (max 6 points per photo)
 - Wrong guess ends turn but keeps accumulated points
-- First player to 10 points wins (with tie-breaker system)
+- First player to 10 points wins (with tie-breaker system). Known quirk: if
+  Player 1 reaches 10 and Player 2 stays below 10 on the tie-breaker turn, the
+  game does not end until Player 1's next turn
 - Perfect 6-point guesses trigger confetti celebration
 
 ## Project Structure
@@ -82,6 +89,14 @@ PhotoGuessingGame/
 1. Open `PhotoGuessingGame.xcodeproj` in Xcode
 2. Select an Apple TV simulator or device
 3. Build and run (Cmd+R)
+
+## README screenshots
+
+Real Simulator captures, made on a Mac by a UI-test harness that lives in the
+development workspace, outside this project
+(`scripts/public-repo-docs/tvos-readme-screenshots/`). It adds a throwaway
+XCUITest target to a copy of the project, plays two full games with the Siri
+Remote, boots its own "README Apple TV" simulator and shuts it down afterwards.
 
 ## Photo Loading
 

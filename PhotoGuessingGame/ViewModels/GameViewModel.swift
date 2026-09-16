@@ -237,11 +237,29 @@ class GameViewModel: ObservableObject {
         }
     }
 
+    /// The next phase this photo can be asked about, or nil when the turn ends.
+    /// A place with no state or city (reverse geocoding does not always return
+    /// one) skips that phase: its selector would have no options to choose.
+    private func followingPhase(for photo: GamePhoto?) -> GuessPhase? {
+        var next = guessPhase.nextPhase(for: gameMode)
+        while let phase = next {
+            switch phase {
+            case .state where photo?.location?.state == nil,
+                 .city where photo?.location?.city == nil:
+                next = phase.nextPhase(for: gameMode)
+            default:
+                return phase
+            }
+        }
+        return nil
+    }
+
     private func handleCorrectGuess() {
         turnScore += guessPhase.points
+        let nextPhase = followingPhase(for: currentPhoto)
 
         // Check if this was the final phase
-        if guessPhase.isFinalPhase {
+        if nextPhase == nil {
             let isPerfect = turnScore == GameConstants.perfectScore
             feedback = GameFeedback(
                 isCorrect: true,
@@ -273,7 +291,8 @@ class GameViewModel: ObservableObject {
                 message: "Correct!",
                 correctAnswer: "",
                 pointsEarned: guessPhase.points,
-                isPerfect: false
+                isPerfect: false,
+                endsTurn: false
             )
 
             soundService.playCorrect()
@@ -281,7 +300,7 @@ class GameViewModel: ObservableObject {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + GameConstants.feedbackDuration) { [weak self] in
                 guard let self = self else { return }
-                if let nextPhase = self.guessPhase.nextPhase(for: self.gameMode) {
+                if let nextPhase = nextPhase {
                     self.guessPhase = nextPhase
                 }
                 self.gamePhase = .playing

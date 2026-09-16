@@ -7,9 +7,14 @@ enum GameUtils {
         var options = Set<Int>()
         options.insert(correctYear)
 
-        // Add years within a reasonable range (±10 years)
-        let minYear = max(1990, correctYear - 10)
-        let maxYear = min(Calendar.current.component(.year, from: Date()), correctYear + 10)
+        // Add years within a reasonable range (±10 years, not before 1990 and
+        // not in the future). The range must still hold the answer and at
+        // least eight years: with a flat 1990 floor, a photo from before 1983
+        // left too few years and the loop below never ended, and one from
+        // before 1980 made the range empty and crashed.
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let maxYear = max(correctYear, min(currentYear, correctYear + 10))
+        let minYear = min(max(1990, correctYear - 10), maxYear - 7, correctYear)
 
         while options.count < 8 {
             let randomYear = Int.random(in: minYear...maxYear)

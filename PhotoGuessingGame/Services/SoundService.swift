@@ -5,6 +5,13 @@ class SoundService {
     private var audioEngine: AVAudioEngine?
     private var playerNode: AVAudioPlayerNode?
 
+    /// The format every tone buffer is generated in. The player node must be
+    /// connected with this same format: AVAudioPlayerNode raises an exception
+    /// (and the app aborts) when a scheduled buffer's format differs from its
+    /// connection's, and connecting with `nil` inherits the mixer's format,
+    /// which is 48 kHz stereo on the tvOS 26 simulator. The mixer converts.
+    private let toneFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1)
+
     init() {
         setupAudioEngine()
     }
@@ -16,7 +23,7 @@ class SoundService {
         guard let engine = audioEngine, let player = playerNode else { return }
 
         engine.attach(player)
-        engine.connect(player, to: engine.mainMixerNode, format: nil)
+        engine.connect(player, to: engine.mainMixerNode, format: toneFormat)
 
         do {
             try engine.start()
@@ -85,11 +92,11 @@ class SoundService {
     }
 
     private func playTone(frequency: Double, duration: Double, type: WaveType, fadeOut: Bool = true) {
-        let sampleRate: Double = 44100
+        guard let format = toneFormat else { return }
+        let sampleRate = format.sampleRate
         let frameCount = Int(sampleRate * duration)
 
-        guard let format = AVAudioFormat(standardFormatWithSampleRate: sampleRate, channels: 1),
-              let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(frameCount)) else {
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(frameCount)) else {
             return
         }
 

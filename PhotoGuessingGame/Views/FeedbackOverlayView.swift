@@ -87,18 +87,21 @@ struct FeedbackOverlayView: View {
                     )
                 }
 
-                // Next player
-                let nextPlayerIndex = (viewModel.currentPlayerIndex + 1) % 2
-                let nextPlayer = viewModel.players[nextPlayerIndex]
+                // Next player, only when this answer ends the turn: a correct
+                // answer before the last phase keeps the same player guessing.
+                if viewModel.feedback.endsTurn {
+                    let nextPlayerIndex = (viewModel.currentPlayerIndex + 1) % 2
+                    let nextPlayer = viewModel.players[nextPlayerIndex]
 
-                HStack(spacing: 10) {
-                    Image(systemName: "arrow.right.circle.fill")
-                        .foregroundColor(.blue)
+                    HStack(spacing: 10) {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .foregroundColor(.blue)
 
-                    Text("Next: \(nextPlayer.name)")
+                        Text("Next: \(nextPlayer.name)")
+                    }
+                    .font(.title3)
+                    .foregroundColor(.secondary)
                 }
-                .font(.title3)
-                .foregroundColor(.secondary)
             }
             .padding(60)
             .background(

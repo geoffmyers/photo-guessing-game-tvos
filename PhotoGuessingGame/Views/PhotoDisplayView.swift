@@ -4,7 +4,7 @@ struct PhotoDisplayView: View {
     @EnvironmentObject var viewModel: GameViewModel
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack {
             // Photo frame
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color.white)
@@ -41,6 +41,7 @@ struct PhotoDisplayView: View {
             // Photo counter badge
             PhotoCounterBadge(text: viewModel.photoCountText)
                 .padding(20)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
         }
         .aspectRatio(16/10, contentMode: .fit)
     }
