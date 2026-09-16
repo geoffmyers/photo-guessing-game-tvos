@@ -1,4 +1,4 @@
-# Contributing to Photo Guessing Game Tvos
+# Contributing to Photo Guessing Game (tvOS)
 
 Thanks for taking an interest. This project is developed inside a private
 mono repo and published here as a snapshot, which shapes a couple of the
