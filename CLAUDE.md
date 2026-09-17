@@ -93,8 +93,7 @@ PhotoGuessingGame/
 ## README screenshots
 
 Real Simulator captures, made on a Mac by a UI-test harness that lives in the
-development workspace, outside this project
-(`scripts/public-repo-docs/tvos-readme-screenshots/`). It adds a throwaway
+maintainer's development workspace, outside this project. It adds a throwaway
 XCUITest target to a copy of the project, plays two full games with the Siri
 Remote, boots its own "README Apple TV" simulator and shuts it down afterwards.
 
@@ -131,4 +130,4 @@ All sounds are synthesized using AVFoundation (no external audio files):
 ## Related Projects
 
 This is the tvOS version of the Photo Guessing Game. See also:
-- `reactjs-projects/photo-guessing-game` - React/Capacitor version for web/iOS/Android
+- [photo-guessing-game](https://github.com/geoffmyers/photo-guessing-game) - React/Capacitor version for web/iOS/Android
