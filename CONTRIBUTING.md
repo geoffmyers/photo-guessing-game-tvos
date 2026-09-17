@@ -41,7 +41,8 @@ grep -m1 -o 'MARKETING_VERSION = [^;]*' PhotoGuessingGame.xcodeproj/project.pbxp
 ```
 
 and, if `v<version>` has no release yet, builds these and publishes them as
-a GitHub Release. To release, raise the version.
+a [GitHub Release](https://github.com/geoffmyers/photo-guessing-game-tvos/releases).
+To release, raise the version.
 
 - **tvOS app** (macOS with Xcode): `*.ipa`
 

@@ -7,6 +7,7 @@
 <!-- BADGES:START -->
 ![Swift 5.9+](https://img.shields.io/badge/Swift-5.9+-F05138?style=flat-square&logo=swift)
 ![tvOS 17.0+](https://img.shields.io/badge/tvOS-17.0+-000000?style=flat-square&logo=appletv)
+[![Latest release](https://img.shields.io/github/v/release/geoffmyers/photo-guessing-game-tvos?style=flat-square&logo=github&label=release)](https://github.com/geoffmyers/photo-guessing-game-tvos/releases/latest)
 [![Licence GPL-3.0-or-later](https://img.shields.io/badge/licence-GPL--3.0--or--later-blue?style=flat-square)](LICENSE.md)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
 <!-- BADGES:END -->
